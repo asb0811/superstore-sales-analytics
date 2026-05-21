@@ -1,6 +1,6 @@
 # Retail Sales Analytics (2015-2018)
 
-South region's sales fell 32% in 2016 - the worst regional collapse in the dataset. This project investigates why, and finds the answer in product mix, not service quality.
+South region's sales fell 32% in 2016 - the worst regional collapse in the dataset. This project investigates the four regions and finds they are structurally different markets. Central has the lowest AOV, explained by an Office Supplies-heavy product mix. South has the smallest customer base with poor retention but high per-order value, suggesting a high-value, low-frequency customer profile. Shipping service quality does not vary across regions and is ruled out as a factor in regional performance differences. 
 
 Built with: MySQL, Power BI, Python (Prophet)
 
@@ -52,7 +52,7 @@ Data loaded into MySQL 8.0. Eight structured EDA checks covering grain, time ran
 
 Analysis used CTEs and window functions for cumulative share, ranking, and year-over-year change. Q3 to Q5 were sharpened from descriptive to diagnostic once Q2 surfaced regional differences in AOV and the 2016 dip.
 
-**Power BI** ([`powerbi/superstore_dashboard.pbix`](powerbi/superstore_dashboard.pbix))
+**Power BI** ([`powerbi/retail_dashboard.pbix`](powerbi/retail_dashboard.pbix))
 
 Three-page dashboard connected directly to the MySQL database. Built a proper `dim_date` table for time intelligence, marked as date table, with relationships defined manually. Five DAX measures (Total Sales, Order Count, Customer Count, AOV, Sales per Customer) organised in a dedicated `_Measures` table. Slicers (Year, Region) synced across all pages.
 
@@ -63,7 +63,7 @@ Daily Prophet attempted first; failed at ~250% MAPE due to high day-to-day volat
 ## Limitations
 
 - **Dataset size.** 9,800 transactions across 4 years is small for retail. Findings are directional, not statistically robust.
-- **Retention figure.** ~99% of customers are active in 2+ years across all regions. This is implausibly high for general retail and almost certainly reflects Kaggle's dataset preparation (filtering to multi-year customers) rather than real customer behaviour. Q4 should be treated as a data quirk, not a finding.
+- **Retention figure.** Retention measure. The 34% to 60% multi-year customer figures reflect what fraction of each region's customer base had orders in two or more distinct calendar years. This is a coarse proxy - a customer who bought in December 2017 and January 2018 counts as multi-year despite a one-month gap. A more rigorous analysis would use rolling-window cohort tracking.
 - **Forecasting horizon.** A 7-day-ahead forecast with no external regressors (holiday calendar, promotions, regional weather) is inherently limited. Wide intervals reflect this honestly.
 - **No causal claims.** Product mix is associated with the AOV gap; this is not the same as proving it causes it. A controlled test would be needed to confirm.
 
