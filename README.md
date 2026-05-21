@@ -1,4 +1,4 @@
-# Superstore Sales Analytics (2015-2018)
+# Retail Sales Analytics (2015-2018)
 
 South region's sales fell 32% in 2016 - the worst regional collapse in the dataset. This project investigates why, and finds the answer in product mix, not service quality.
 
